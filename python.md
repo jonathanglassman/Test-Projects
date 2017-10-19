@@ -381,42 +381,13 @@ If the request is successful, `response` will be a `dict`:
 ```
 
 Otherwise the client will raise a `HTTPError`:
-<table>
-<thead>
-<tr>
-<th>`error.status_code`</th>
-<th>`error.message`</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    'error': 'ValidationError',
-    'message': 'bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]'
-}]
-</pre>
-</td>
-</tr>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "ValidationError",
-    "message": "Apple is not one of [sms, email, letter]"
-}]
-</pre>
-</td>
-</tr>
-</tbody>
-</table>
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Apple is not one of [sms, email, letter]"`<br>`}]`|
+
+
 </details>
 
 <details>
@@ -500,42 +471,12 @@ If the request is successful, `response` will be a `<generator object>` that wil
 ```
 
 Otherwise the client will raise a `HTTPError`:
-<table>
-<thead>
-<tr>
-<th>`error.status_code`</th>
-<th>`error.message`</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    'error': 'ValidationError',
-    'message': 'bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]'
-}]
-</pre>
-</td>
-</tr>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "ValidationError",
-    "message": "Apple is not one of [sms, email, letter]"
-}]
-</pre>
-</td>
-</tr>
-</tbody>
-</table>
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Apple is not one of [sms, email, letter]"`<br>`}]`|
+
 </details>
 
 <details>

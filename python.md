@@ -24,6 +24,13 @@ the **API integration** page.
 
 ### Text message
 
+#### Method 
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
 ```python
 response = notifications_client.send_sms_notification(
     phone_number='+447900900123',
@@ -32,6 +39,7 @@ response = notifications_client.send_sms_notification(
     reference=None
 )
 ```
+</details>
 
 #### Response
 
@@ -106,6 +114,13 @@ personalisation={
 
 ### Email
 
+#### Method
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
 ```python
 response = notifications_client.send_email_notification(
     email_address='the_email_address@example.com',
@@ -115,13 +130,15 @@ response = notifications_client.send_email_notification(
     email_reply_to_id=None
 )
 ```
+</details>
+
+#### Response
 
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
 </summary>
 
-If the request is successful, `response` will be a `dict`:
 
 ```python
 {
@@ -150,32 +167,33 @@ Otherwise the client will raise a `HTTPError`:
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can"t send to this recipient using a team-only API key"`<br>`]}`|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can"t send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|
 
-
 </details>
 
-<details>
-<summary>Arguments</summary>
+#### Arguments
 
-#### `email_address`
+<details>
+<summary>Click here for more information</summary>
+
+##### `email_address`
 The email address of the recipient, only required for email notifications.
 
-#### `template_id`
+##### `template_id`
 
 Find by clicking **API info** for the template you want to send.
 
-#### `reference`
+##### `reference`
 
 An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
 
 You can omit this argument if you do not require a reference for the notification.
 
-#### `email_reply_to_id`
+##### `email_reply_to_id`
 
 Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'. 
 
 If you omit this argument your default email reply-to address will be set for the notification.
 
-#### `personalisation`
+##### `personalisation`
 
 If a template has placeholders, you need to provide their values, for example:
 
@@ -189,6 +207,13 @@ personalisation={
 </details>
 
 ### Letter
+
+#### Method
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
 
 ```python
 response = notifications_client.send_letter_notification(
@@ -204,13 +229,14 @@ response = notifications_client.send_letter_notification(
     reference=None
 )
 ```
+</details>
+
+#### Response
 
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
 </summary>
-
-If the request is successful, `response` will be a `dict`:
 
 ```python
 {
@@ -242,21 +268,22 @@ Otherwise the client will raise a `HTTPError`:
 
 </details>
 
+#### Arguments
+
 <details>
-<summary>Arguments</summary>
+<summary>Click here to expand for more information.</summary>
 
-
-#### `template_id`
+##### `template_id`
 
 Find by clicking **API info** for the template you want to send.
 
-#### `reference`
+##### `reference`
 
 An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
 
 You can omit this argument if you do not require a reference for the notification.
 
-#### `personalisation`
+##### `personalisation`
 
 The letter must contain:
 
@@ -283,16 +310,25 @@ personalisation={
 
 ## Get the status of one message
 
-```python
-response = notifications_client.get_notification_by_id(notification_id)
-```
+#### Method
 
 <details>
 <summary>
-Response
+Click here to expand for more information.
 </summary>
 
-If the request is successful, `response` will be a `dict`:
+```python
+response = notifications_client.get_notification_by_id(notification_id)
+```
+</details>
+
+#### Response
+
+<details>
+<summary>
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+</summary>
+
 
 ```python
 {
@@ -333,17 +369,29 @@ Otherwise the client will raise a `HTTPError`:
 
 ## Get the status of all messages (with pagination)
 
-_This will return one page of notifications (250) per call. Use the `get_all_notifications_iterator` to retrieve all notifications unpaginated._
+#### Method
+
+<details>
+
+<summary>
+This will return one page of notifications (250) per call. Use the `get_all_notifications_iterator` to retrieve all notifications unpaginated. Click here to expand for more information.
+</summary>
+
 
 ```python
 response = notifications_client.get_all_notifications(template_type, status, reference, older_than)
 ```
+
+</details>
+
+#### Response
+
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
 </summary>
 
-If the request is successful, `response` will be a `dict`:
+
 
 ```python
 {"notifications":
@@ -392,10 +440,14 @@ Otherwise the client will raise a `HTTPError`:
 
 </details>
 
-<details>
-<summary>Arguments</summary>
 
-### `template_type`
+#### Arguments
+
+
+<details>
+<summary>Click here to expand for more information</summary>
+
+##### `template_type`
 
 You can filter by:
 
@@ -405,9 +457,9 @@ You can filter by:
 
 You can omit this argument to ignore this filter.
 
-### `status`
+##### `status`
 
-#### email
+__email__
 
 You can filter by:
 
@@ -420,7 +472,7 @@ You can filter by:
 
 You can omit this argument to ignore this filter.
 
-#### text message
+__text message__
 
 You can filter by:
 
@@ -433,7 +485,7 @@ You can filter by:
 
 You can omit this argument to ignore this filter.
 
-#### letter
+__letter__
 
 You can filter by:
 
@@ -442,13 +494,13 @@ You can filter by:
 
 You can omit this argument to ignore this filter.
 
-### `reference`
+##### `reference`
 
 This is the `reference` you gave at the time of sending the notification. The `reference` can be a unique identifier for the notification or an identifier for a batch of notifications.
 
 You can omit this argument to ignore the filter.
 
-### `olderThanId`
+##### `olderThanId`
 
 You can get the notifications older than a given Notification.notificationId.
 

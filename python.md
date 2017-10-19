@@ -229,81 +229,15 @@ If the request is successful, `response` will be a `dict`:
 ```
 
 Otherwise the client will raise a `HTTPError`:
-<table>
-<thead>
-<tr>
-<th>`error.status_code`</th>
-<th>`error.message`</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<pre>429</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "RateLimitError",
-    "message": "Exceeded rate limit for key type live of 10 requests per 20 seconds"
-}]
-</pre>
-</td>
-</tr>
-<tr>
-<td>
-<pre>429</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "TooManyRequestsError",
-    "message": "Exceeded send limits (50) for today"
-}]
-</pre>
-</td>
-</tr>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "BadRequestError",
-    "message": "Cannot send letters with a team api key"
-]}
-</pre>
-</td>
-</tr>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "BadRequestError",
-    "message": "Cannot send letters when service is in trial mode"
-}]
-</pre>
-</td>
-</tr>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "ValidationError",
-    "message": "personalisation address_line_1 is a required property"
-}]
-</pre>
-</td>
-</tr>
-</tbody>
-</table>
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`429`|`[{`<br>`"error": "RateLimitError",`<br>`"message": "Exceeded rate limit for key type live of 10 requests per 20 seconds"`<br>`}]`|
+|`429`|`[{`<br>`"error": "TooManyRequestsError",`<br>`"message": "Exceeded send limits (50) for today"`<br>`}]`|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters with a team api key"`<br>`]}`|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "personalisation address_line_1 is a required property"`<br>`}]`|
+
 </details>
 
 <details>

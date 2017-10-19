@@ -331,6 +331,8 @@ Otherwise the client will raise a `HTTPError`:
 
 ## Get the status of all messages (with pagination)
 
+### With pagination
+
 _This will return one page of notifications (250) per call. Use the `get_all_notifications_iterator` to retrieve all notifications unpaginated._
 
 ```python
@@ -389,6 +391,33 @@ Otherwise the client will raise a `HTTPError`:
 
 
 </details>
+
+### Without pagination
+
+```python
+response = get_all_notifications_iterator(status="sending")
+```
+<details>
+<summary>
+Response
+</summary>
+
+If the request is successful, `response` will be a `<generator object>` that will yield all messages:
+
+```python
+<generator object NotificationsAPIClient.get_all_notifications_iterator at 0x1026c7410>
+```
+
+Otherwise the client will raise a `HTTPError`:
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Apple is not one of [sms, email, letter]"`<br>`}]`|
+
+</details>
+
+### Both
 
 <details>
 <summary>Arguments</summary>

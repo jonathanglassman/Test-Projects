@@ -603,10 +603,10 @@ This is the `reference` you gave at the time of sending the notification. The `r
 ## Get a template by ID
 
 #### Method 
-
+This will return the latest version of the template. Use [get_template_version](#get-a-template-by-id-and-version) to retrieve a specific template version. 
 <details>
 <summary>
-_This will return the latest version of the template. Use [get_template_version](#get-a-template-by-id-and-version) to retrieve a specific template version. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 

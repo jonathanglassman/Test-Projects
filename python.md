@@ -445,7 +445,7 @@ Otherwise the client will raise a `HTTPError`:
 
 
 <details>
-<summary>Click here to expand for more information</summary>
+<summary>Click here to expand for more information.</summary>
 
 ##### `template_type`
 

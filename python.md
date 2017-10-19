@@ -655,7 +655,7 @@ Otherwise the client will raise a `HTTPError`:
 
 Find by clicking **API info** for the template you want to send.
 
-</details
+</details>
 
 
 ## Get a template by ID and version

@@ -771,7 +771,7 @@ response = notifications_client.post_template_preview(
 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`.
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
 </summary>
 
 

@@ -566,29 +566,11 @@ If the request is successful, `response` will be a `dict`:
 ```
 
 Otherwise the client will raise a `HTTPError`:
-<table>
-<thead>
-<tr>
-<th>`error.status_code`</th>
-<th>`error.message`</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<pre>404</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "NoResultFound",
-    "message": "No result found"
-]}
-</pre>
-</td>
-</tr>
-</tbody>
-</table>
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|
+
 </details>
 
 ## Get a template by ID and version
@@ -621,29 +603,11 @@ If the request is successful, `response` will be a `dict`:
 ```
 
 Otherwise the client will raise a `HTTPError`:
-<table>
-<thead>
-<tr>
-<th>`error.status_code`</th>
-<th>`error.message`</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<pre>404</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "NoResultFound",
-    "message": "No result found"
-]}
-</pre>
-</td>
-</tr>
-</tbody>
-</table>
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|
+
 </details>
 
 ## Get all templates
@@ -721,40 +685,10 @@ If the request is successful, `response` will be a `dict`:
 ```
 
 Otherwise the client will raise a `HTTPError`:
-<table>
-<thead>
-<tr>
-<th>`error.status_code`</th>
-<th>`error.message`</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "BadRequestError",
-    "message": "Missing personalisation: [name]"
-]}
-</pre>
-</td>
-</tr>
-<tr>
-<td>
-<pre>404</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "NoResultFound",
-    "message": "No result found"
-]}
-</pre>
-</td>
-</tr>
-</tbody>
-</table>
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Missing personalisation: [name]"`<br>`}]`|
+|`400`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+
 </details>

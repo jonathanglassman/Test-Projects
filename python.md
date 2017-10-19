@@ -32,12 +32,13 @@ response = notifications_client.send_sms_notification(
     reference=None
 )
 ```
+
+#### Response
+
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
 </summary>
-
-If the request is successful, `response` will be a `dict`:
 
 ```python
 {
@@ -66,30 +67,31 @@ Otherwise the client will raise a `HTTPError`:
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can"t send to this recipient using a team-only API key"`<br>`]}`|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Can"t send to this recipient when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode"`<br>`}]`|
 
-
 </details>
+
+#### Arguments
 
 <details>
 <summary>
-Arguments
+Click here for more information on the arguments for this function.
 </summary>
 
-#### `phone_number`
+##### `phone_number`
 
 The phone number of the recipient, only required for sms notifications.
 
-#### `template_id`
+##### `template_id`
 
 Find by clicking **API info** for the template you want to send.
 
-#### `reference`
+##### `reference`
 
 An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
 
 You can omit this argument if you do not require a reference for the notification.
 
 
-#### `personalisation`
+##### `personalisation`
 
 If a template has placeholders, you need to provide their values, for example:
 

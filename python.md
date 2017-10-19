@@ -321,42 +321,12 @@ If the request is successful, `response` will be a `dict`:
 ```
 
 Otherwise the client will raise a `HTTPError`:
-<table>
-<thead>
-<tr>
-<th>`error.status_code`</th>
-<th>`error.message`</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<pre>404</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "NoResultFound",
-    "message": "No result found"
-}]
-</pre>
-</td>
-</tr>
-<tr>
-<td>
-<pre>400</pre>
-</td>
-<td>
-<pre>
-[{
-    "error": "ValidationError",
-    "message": "id is not a valid UUID"
-}]
-</pre>
-</td>
-</tr>
-</tbody>
-</table>
+
+|`error.status_code`|`error.message`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|
+
 </details>
 
 ## Get the status of all messages (with pagination)

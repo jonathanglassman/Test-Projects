@@ -510,15 +510,24 @@ You can omit this argument to ignore the filter.
 
 ## Get the status of all messages (without pagination)
 
+#### Method
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
 ```python
 response = get_all_notifications_iterator(status="sending")
 ```
+</details>
+
+#### Response
+
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `<generator object>` that will yield all messages. Click here to expand for more information.
 </summary>
-
-If the request is successful, `response` will be a `<generator object>` that will yield all messages:
 
 ```python
 <generator object NotificationsAPIClient.get_all_notifications_iterator at 0x1026c7410>
@@ -533,10 +542,12 @@ Otherwise the client will raise a `HTTPError`:
 
 </details>
 
-<details>
-<summary>Arguments</summary>
+#### Arguments
 
-### `template_type`
+<details>
+<summary>Click here to expand for more information.</summary>
+
+##### `template_type`
 
 You can filter by:
 
@@ -546,9 +557,9 @@ You can filter by:
 
 You can omit this argument to ignore this filter.
 
-### `status`
+##### `status`
 
-#### email
+__email__
 
 You can filter by:
 
@@ -561,7 +572,7 @@ You can filter by:
 
 You can omit this argument to ignore this filter.
 
-#### text message
+__text message__
 
 You can filter by:
 
@@ -574,7 +585,7 @@ You can filter by:
 
 You can omit this argument to ignore this filter.
 
-#### letter
+__letter__
 
 You can filter by:
 
@@ -583,7 +594,7 @@ You can filter by:
 
 You can omit this argument to ignore this filter.
 
-### `reference`
+##### `reference`
 
 This is the `reference` you gave at the time of sending the notification. The `reference` can be a unique identifier for the notification or an identifier for a batch of notifications.
 
@@ -591,20 +602,28 @@ This is the `reference` you gave at the time of sending the notification. The `r
 
 ## Get a template by ID
 
-_This will return the latest version of the template. Use [get_template_version](#get-a-template-by-id-and-version) to retrieve a specific template version_
+#### Method 
+
+<details>
+<summary>
+_This will return the latest version of the template. Use [get_template_version](#get-a-template-by-id-and-version) to retrieve a specific template version. Click here to expand for more information.
+</summary>
+
 
 ```python
 response = notifications_client.get_template(
     'template_id'
 )
 ```
+</details>
+
+#### Response
 
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
 </summary>
 
-If the request is successful, `response` will be a `dict`:
 
 ```python
 {
@@ -629,19 +648,27 @@ Otherwise the client will raise a `HTTPError`:
 
 ## Get a template by ID and version
 
+#### Method
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
 ```python
 response = notifications_client.get_template_version(
     'template_id',
     1   # integer required for version number
 )
 ```
+</details>
+
+#### Response
 
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
 </summary>
-
-If the request is successful, `response` will be a `dict`:
 
 ```python
 {
@@ -666,21 +693,30 @@ Otherwise the client will raise a `HTTPError`:
 
 ## Get all templates
 
+#### Method
+
+<details>
+<summary>
+This will return the latest version for each template. Click here to expand for more information.
+</summary>
+
+
 ```python
 response = notifications_client.get_all_templates(
     template_type=None # optional
 )
 ```
-_This will return the latest version for each template_
 
 [See available template types](#template_type)
 
+</details>
+
+#### Response
+
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `dict`. Click here to expand for more information.
 </summary>
-
-If the request is successful, `response` will be a `dict`:
 
 ```python
 {
@@ -714,6 +750,14 @@ If no templates exist for a template type or there no templates for a service, t
 
 ## Generate a preview template
 
+#### Method
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+
 ```
 response = notifications_client.post_template_preview(
     'template_id',
@@ -721,12 +765,15 @@ response = notifications_client.post_template_preview(
 )
 ```
 
+</details>
+
+#### Response
+
 <details>
 <summary>
-Response
+If the request is successful, `response` will be a `dict`.
 </summary>
 
-If the request is successful, `response` will be a `dict`:
 
 ```python
 {

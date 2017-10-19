@@ -646,6 +646,18 @@ Otherwise the client will raise a `HTTPError`:
 
 </details>
 
+#### Arguments
+
+<details>
+<summary>Click here to expand for more information.</summary>
+
+##### `template_id`
+
+Find by clicking **API info** for the template you want to send.
+
+</details
+
+
 ## Get a template by ID and version
 
 #### Method
@@ -688,6 +700,21 @@ Otherwise the client will raise a `HTTPError`:
 |`error.status_code`|`error.message`|
 |:---|:---|
 |`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|
+
+</details>
+
+#### Arguments
+
+<details>
+<summary>Click here to expand for more information.</summary>
+
+##### `template_id`
+
+Find by clicking **API info** for the template you want to send.
+
+##### `version`
+
+The version number of the template.
 
 </details>
 
@@ -748,6 +775,21 @@ If no templates exist for a template type or there no templates for a service, t
 
 </details>
 
+#### Arguments
+
+<details>
+<summary>Click here to expand for more information.</summary>
+
+##### `template_type`
+
+If omitted all messages are returned. Otherwise you can filter by:
+
+- `email`
+- `sms`
+- `letter`
+
+</details>
+
 ## Generate a preview template
 
 #### Method
@@ -791,5 +833,27 @@ Otherwise the client will raise a `HTTPError`:
 |:---|:---|
 |`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Missing personalisation: [name]"`<br>`}]`|
 |`400`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+
+</details>
+
+#### Arguments
+
+<details>
+<summary>Click here to expand for more information.</summary>
+
+##### `template_id`
+
+Find by clicking **API info** for the template you want to send.
+
+##### `personalisation`
+
+If a template has placeholders, you need to provide their values, for example:
+
+```python
+personalisation={
+    'first_name': 'Amala',
+    'reference_number': '300241',
+}
+```
 
 </details>

@@ -187,7 +187,7 @@ SendEmailResponse response = client.sendEmail(templateId, mobileNumber, personal
 
 </details>
 
-#### Response - SendEmailResponse
+#### Response
 
 If the request is successful, the SendEmailResponse is returned from the client. Attributes of the SendEmailResponse are listed below. 
 

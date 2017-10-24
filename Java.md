@@ -491,47 +491,46 @@ This is the `reference` you gave at the time of sending the notification. The `r
 ## Get a template by ID
 
 #### Method 
-This will return the latest version of the template. Use [get_template_version](#get-a-template-by-id-and-version) to retrieve a specific template version. 
+
+This will return the latest version of the template. Use [getTemplateVersion](#get-a-template-by-id-and-version) to retrieve a specific template version.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
 
-```python
-response = notifications_client.get_template(
-    'template_id'
-)
+```java
+Template template = client.getTemplateById(templateId);
 ```
 </details>
 
 #### Response
 
-If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
 
-```python
-{
-    "id": "template_id", # required
-    "type": "sms" | "email" | "letter", # required
-    "created_at": "created at", # required
-    "updated_at": "updated at", # required
-    "version": "version", # integer required
-    "created_by": "someone@example.com", # email required
-    "body": "Body of the notification", # required
-    "subject": "Subject of an email or letter notification or None if an sms message"
-}
+```Java
+    UUID id;
+    String templateType;
+    DateTime createdAt;
+    Optional<DateTime> updatedAt;
+    String createdBy;
+    int version;
+    String body;
+    Optional<String> subject;
+    Optional<Map<String, Object>> personalisation;
 ```
 
-Otherwise the client will raise a `HTTPError`:
+Otherwise the client will raise a `NotificationClientException`.
 
 |`error.status_code`|`error.message`|
 |:---|:---|
 |`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|
 
 </details>
 
@@ -540,9 +539,9 @@ Otherwise the client will raise a `HTTPError`:
 <details>
 <summary>Click here to expand for more information.</summary>
 
-##### `template_id`
+##### `templateId`
 
-Find by clicking **API info** for the template you want to send.
+The template id is visible on the template page in the application.
 
 </details>
 

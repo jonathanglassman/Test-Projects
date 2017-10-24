@@ -550,45 +550,44 @@ The template id is visible on the template page in the application.
 
 #### Method
 
+This will return the template for the given id and version.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-```python
-response = notifications_client.get_template_version(
-    'template_id',
-    1   # integer required for version number
-)
+```java
+Template template = client.getTemplateVersion(templateId, version);
 ```
+
 </details>
 
 #### Response
 
-If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-```python
-{
-    "id": "template_id", # required
-    "type": "sms" | "email" | "letter", # required
-    "created_at": "created at", # required
-    "updated_at": "updated at", # required
-    "version": "version", # integer required
-    "created_by": "someone@example.com", # email required
-    "body": "Body of the notification", # required
-    "subject": "Subject of an email or letter notification, or None if an sms message"
-}
+```Java
+    UUID id;
+    String templateType;
+    DateTime createdAt;
+    Optional<DateTime> updatedAt;
+    String createdBy;
+    int version;
+    String body;
+    Optional<String> subject;
+    Optional<Map<String, Object>> personalisation;
 ```
 
-Otherwise the client will raise a `HTTPError`:
+Otherwise the client will raise a `NotificationClientException`:
 
 |`error.status_code`|`error.message`|
 |:---|:---|
 |`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No Result Found"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|
 
 </details>
 
@@ -597,13 +596,12 @@ Otherwise the client will raise a `HTTPError`:
 <details>
 <summary>Click here to expand for more information.</summary>
 
-##### `template_id`
-
-Find by clicking **API info** for the template you want to send.
+##### `templateId`
+The template id is visible on the template page in the application.
 
 ##### `version`
+A history of the template is kept. There is a link to `See previous versions` on the template page in the application.
 
-The version number of the template.
 
 </details>
 
@@ -611,17 +609,16 @@ The version number of the template.
 
 #### Method
 
-This will return the latest version for each template. 
+This will return the latest version for each template for your service.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
 
-```python
-response = notifications_client.get_all_templates(
-    template_type=None # optional
-)
+```java
+TemplateList templates = client.getAllTemplates(templateType);
 ```
 
 [See available template types](#template_type)
@@ -630,39 +627,22 @@ response = notifications_client.get_all_templates(
 
 #### Response
 
-If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-```python
-{
-    "templates" : [
-        {
-            "id": "template_id", # required
-            "type": "sms" | "email" | "letter", # required
-            "created_at": "created at", # required
-            "updated_at": "updated at", # required
-            "version": "version", # integer required
-            "created_by": "someone@example.com", # email required
-            "body": "Body of the notification", # required
-            "subject": "Subject of an email or letter notification, or None if an sms message"
-        },
-        {
-            ... another template
-        }
-    ]
-}
+```java
+    List<Template> templates;
 ```
 
-If no templates exist for a template type or there no templates for a service, the `response` will be a `dict` with an empty `templates` list element:
+If the response is successful, a TemplateList is returned.
 
-```python
-{
-    "templates" : []
-}
-```
+If no templates exist for a template type or there no templates for a service, the templates list will be empty.
+
+Otherwise the client will raise a `NotificationClientException`:
+
+???
 
 </details>
 
@@ -671,13 +651,15 @@ If no templates exist for a template type or there no templates for a service, t
 <details>
 <summary>Click here to expand for more information.</summary>
 
-##### `template_type`
+##### `templateType`
 
-If omitted all messages are returned. Otherwise you can filter by:
+You can filter the templates by the following options:
 
-- `email`
-- `sms`
-- `letter`
+* `email`
+* `sms`
+* `letter`
+
+You can also pass in an empty string or null to ignore the filter.
 
 </details>
 
@@ -685,46 +667,42 @@ If omitted all messages are returned. Otherwise you can filter by:
 
 #### Method
 
+This will return the contents of a template with the placeholders replaced with the given personalisation.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
 
-```
-response = notifications_client.post_template_preview(
-    'template_id',
-    personalisation={'name': 'chris'}
-)
+```Java
+TemplatePreview templatePreview = client.getTemplatePreview(templateId, personalisation)
 ```
 
 </details>
 
 #### Response
 
-If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
 
-```python
-{
-    "id": "notify_id", # required
-    "type": "sms" | "email" | "letter", # required
-    "version": "version", # integer required
-    "body": "Body of the notification", # required
-    "subject": "Subject of an email or letter notification, or None if an sms message"
-}
+```java
+    UUID id;
+    String templateType;
+    int version;
+    String body;
+    Optional<String> subject;
 ```
 
-Otherwise the client will raise a `HTTPError`:
+Otherwise the client will raise a `NotificationClientException`:
 
 |`error.status_code`|`error.message`|
 |:---|:---|
-|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"message": "Missing personalisation: [name]"`<br>`}]`|
 |`400`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|
 
 </details>
 
@@ -733,19 +711,12 @@ Otherwise the client will raise a `HTTPError`:
 <details>
 <summary>Click here to expand for more information.</summary>
 
-##### `template_id`
+##### `templateId`
 
-Find by clicking **API info** for the template you want to send.
+The template id is visible on the template page in the application.
 
 ##### `personalisation`
 
-If a template has placeholders, you need to provide their values, for example:
-
-```python
-personalisation={
-    'first_name': 'Amala',
-    'reference_number': '300241',
-}
-```
+If a template has placeholders, you need to provide their values. `personalisation` can be an empty or null in which case no placeholders are provided for the notification.
 
 </details>

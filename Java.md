@@ -153,7 +153,31 @@ Otherwise the client will raise a `NotificationClientException`:
 Click here to expand for more information.
 </summary>
 
-TBC
+#### `phoneNumber`
+The mobile number the SMS notification is sent to.
+
+#### `emailAddress`
+The email address the email notification is sent to.
+
+#### `templateId`
+
+The template id is visible on the template page in the application.
+
+#### `personalisation`
+
+The letter must contain:
+
+- mandatory address fields
+- optional address fields if applicable
+- fields from template
+
+#### `personalisation` (for letters)
+
+If you are sending a letter, you will need to provide the address fields in the format `"address_line_#"`, numbered from 1 to 6, and also the `"postcode"` field
+The fields `"address_line_1"`, `"address_line_2"` and `"postcode"` are required.
+
+#### `reference`
+An optional unique identifier for the notification or an identifier for a batch of notifications. `reference` can be an empty string or null.
 
 </details>
 
@@ -213,7 +237,31 @@ Otherwise the client will raise a `NotificationClientException`:
 <details>
 <summary>Click here for more information</summary>
 
-TBC
+#### `phoneNumber`
+The mobile number the SMS notification is sent to.
+
+#### `emailAddress`
+The email address the email notification is sent to.
+
+#### `templateId`
+
+The template id is visible on the template page in the application.
+
+#### `personalisation`
+
+The letter must contain:
+
+- mandatory address fields
+- optional address fields if applicable
+- fields from template
+
+#### `personalisation` (for letters)
+
+If you are sending a letter, you will need to provide the address fields in the format `"address_line_#"`, numbered from 1 to 6, and also the `"postcode"` field
+The fields `"address_line_1"`, `"address_line_2"` and `"postcode"` are required.
+
+#### `reference`
+An optional unique identifier for the notification or an identifier for a batch of notifications. `reference` can be an empty string or null.
 
 </details>
 
@@ -248,7 +296,7 @@ SendLetterResponse response = client.sendLetter(templateId, personalisation, "yo
 ```
 </details>
 
-#### Response - SendLetterResponse
+#### Response
 
 If the request is successful, the SendLetterResponse is returned from the client. Attributes of the SendLetterResponse are listed below.
 <details>

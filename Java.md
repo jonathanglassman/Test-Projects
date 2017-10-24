@@ -116,7 +116,7 @@ SendSmsResponse response = client.sendSms(templateId, mobileNumber, personalisat
 
 </details>
 
-#### Response - SendSMSResponse
+#### Response
 
 If the request is successful, the SendSmsResponse is returned from the client. Attributes of the SendSmsResponse are listed below. 
 <details>
@@ -153,42 +153,7 @@ Otherwise the client will raise a `NotificationClientException`:
 Click here to expand for more information.
 </summary>
 
-##### `phoneNumber`
-
-The phone number of the recipient, only required for sms notifications. / The mobile number the SMS notification is sent to.
-
-##### `template_id`
-
-Find by clicking **API info** for the template you want to send. / The template id is visible on the template page in the application.
-
-##### `reference`
-
-An optional unique identifier for the notification or an identifier for a batch of notifications. reference can be an empty string or null. / 
-
-An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
-
-You can omit this argument if you do not require a reference for the notification.
-
-
-##### `personalisation`
-
-The letter must contain:
-
-- mandatory address fields
-- optional address fields if applicable
-- fields from template
-
-If you are sending a letter, you will need to provide the address fields in the format `"address_line_#"`, numbered from 1 to 6, and also the `"postcode"` field
-The fields `"address_line_1"`, `"address_line_2"` and `"postcode"` are required.
-
-If a template has placeholders, you need to provide their values, for example:
-
-```python
-personalisation={
-    'first_name': 'Amala',
-    'reference_number': '300241',
-}
-```
+TBC
 
 </details>
 
@@ -201,45 +166,38 @@ personalisation={
 Click here to expand for more information.
 </summary>
 
-```python
-response = notifications_client.send_email_notification(
-    email_address='the_email_address@example.com',
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a'
-    personalisation=None,
-    reference=None,
-    email_reply_to_id=None
-)
+```java
+HashMap<String, String> personalisation = new HashMap<>();
+personalisation.put("name", "Jo");
+personalisation.put("reference_number", "13566");
+SendEmailResponse response = client.sendEmail(templateId, mobileNumber, personalisation, "yourReferenceString");
 ```
+
 </details>
 
-#### Response
+#### Response - SendEmailResponse
 
-If the request is successful, `response` will be a `dict`. 
+If the request is successful, the SendEmailResponse is returned from the client. Attributes of the SendEmailResponse are listed below. 
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
 
-```python
-{
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": None,
-  "content": {
-    "subject": "Licence renewal",
-    "body": "Dear Bill, your licence is due for renewal on 3 January 2016.",
-    "from_email": "the_service@gov.uk"
-  },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
-  "template": {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-    "version": 1,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
-  }
-}
+```java
+	UUID notificationId;
+	Optional<String> reference;
+	UUID templateId;
+	int templateVersion;
+	String templateUri;
+	String body;
+	String subject;
+	Optional<String> fromEmail;
+
 ```
 
-Otherwise the client will raise a `HTTPError`:
+Otherwise the client will raise a `NotificationClientException`:
 
 |`error.status_code`|`error.message`|
 |:---|:---|
@@ -255,35 +213,7 @@ Otherwise the client will raise a `HTTPError`:
 <details>
 <summary>Click here for more information</summary>
 
-##### `email_address`
-The email address of the recipient, only required for email notifications.
-
-##### `template_id`
-
-Find by clicking **API info** for the template you want to send.
-
-##### `reference`
-
-An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
-
-You can omit this argument if you do not require a reference for the notification.
-
-##### `email_reply_to_id`
-
-Optional. Specifies the identifier of the email reply-to address to set for the notification. The identifiers are found in your service Settings, when you 'Manage' your 'Email reply to addresses'. 
-
-If you omit this argument your default email reply-to address will be set for the notification.
-
-##### `personalisation`
-
-If a template has placeholders, you need to provide their values, for example:
-
-```python
-personalisation={
-    'first_name': 'Amala',
-    'application_number': '300241',
-}
-```
+TBC
 
 </details>
 
@@ -291,54 +221,52 @@ personalisation={
 
 #### Method
 
+The letter must contain:
+
+- mandatory address fields
+- optional address fields if applicable
+- fields from template
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-```python
-response = notifications_client.send_letter_notification(
-    template_id='f33517ff-2a88-4f6e-b855-c550268ce08a',
-    personalisation={
-      'address_line_1': 'The Occupier',  # required
-      'address_line_2': '123 High Street', # required
-      'address_line_3': 'London',
-      'postcode': 'SW14 6BH',  # required
+```java
+HashMap<String, String> personalisation = new HashMap<>();
+personalisation.put("address_line_1", "The Occupier"); // mandatory address field
+personalisation.put("address_line_2", "Flat 2"); // mandatory address field
+personalisation.put("address_line_3", "123 High Street"); // optional address field
+personalisation.put("address_line_4", "Richmond upon Thames"); // optional address field
+personalisation.put("address_line_5", "London"); // optional address field
+personalisation.put("address_line_6", "Middlesex"); // optional address field
+personalisation.put("postcode", "SW14 6BH"); // mandatory address field
+personalisation.put("application_id", "1234"); // field from template
+personalisation.put("application_date", "2017-01-01"); // field from template
 
-      ... # any other optional address lines, or personalisation fields found in your template
-    },
-    reference=None
-)
+SendLetterResponse response = client.sendLetter(templateId, personalisation, "yourReferenceString");
 ```
 </details>
 
-#### Response
+#### Response - SendLetterResponse
 
-If the request is successful, `response` will be a `dict`.
+If the request is successful, the SendLetterResponse is returned from the client. Attributes of the SendLetterResponse are listed below.
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-```python
-{
-  "id": "740e5834-3a29-46b4-9a6f-16142fde533a",
-  "reference": None,
-  "content": {
-    "subject": "Licence renewal",
-    "body": "Dear Bill, your licence is due for renewal on 3 January 2016.",
-  },
-  "uri": "https://api.notifications.service.gov.uk/v2/notifications/740e5834-3a29-46b4-9a6f-16142fde533a",
-  "template": {
-    "id": "f33517ff-2a88-4f6e-b855-c550268ce08a",
-    "version": 1,
-    "uri": "https://api.notifications.service.gov.uk/v2/template/f33517ff-2a88-4f6e-b855-c550268ce08a"
-  }
-  "scheduled_for": None
-}
+```java
+	UUID notificationId;
+	Optional<String> reference;
+	UUID templateId;
+	int templateVersion;
+	String templateUri;
+	String body;
+	String subject;
 ```
 
-Otherwise the client will raise a `HTTPError`:
+Otherwise the client will raise a `NotificationClientException`:
 
 |`error.status_code`|`error.message`|
 |:---|:---|
@@ -355,17 +283,17 @@ Otherwise the client will raise a `HTTPError`:
 <details>
 <summary>Click here to expand for more information.</summary>
 
-##### `template_id`
+#### `phoneNumber`
+The mobile number the SMS notification is sent to.
 
-Find by clicking **API info** for the template you want to send.
+#### `emailAddress`
+The email address the email notification is sent to.
 
-##### `reference`
+#### `templateId`
 
-An optional identifier you generate. The `reference` can be used as a unique reference for the notification. Because Notify does not require this reference to be unique you could also use this reference to identify a batch or group of notifications.
+The template id is visible on the template page in the application.
 
-You can omit this argument if you do not require a reference for the notification.
-
-##### `personalisation`
+#### `personalisation`
 
 The letter must contain:
 
@@ -373,19 +301,13 @@ The letter must contain:
 - optional address fields if applicable
 - fields from template
 
-```python
-personalisation={
-    'address_line_1': 'The Occupier', 		# mandatory address field
-    'address_line_2': 'Flat 2', 		# mandatory address field
-    'address_line_3': '123 High Street', 	# optional address field
-    'address_line_4': 'Richmond upon Thames', 	# optional address field
-    'address_line_5': 'London', 		# optional address field
-    'address_line_6': 'Middlesex', 		# optional address field
-    'postcode': 'SW14 6BH', 			# mandatory address field
-    'application_id': '1234', 			# field from template
-    'application_date': '2017-01-01', 		# field from template
-}
-```
+#### `personalisation` (for letters)
+
+If you are sending a letter, you will need to provide the address fields in the format `"address_line_#"`, numbered from 1 to 6, and also the `"postcode"` field
+The fields `"address_line_1"`, `"address_line_2"` and `"postcode"` are required.
+
+#### `reference`
+An optional unique identifier for the notification or an identifier for a batch of notifications. `reference` can be an empty string or null.
 
 </details>
 

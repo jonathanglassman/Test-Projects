@@ -43,9 +43,10 @@ response = notifications_client.send_sms_notification(
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 ```python
@@ -81,7 +82,7 @@ Otherwise the client will raise a `HTTPError`:
 
 <details>
 <summary>
-Click here for more information on the arguments for this function.
+Click here to expand for more information.
 </summary>
 
 ##### `phone_number`
@@ -134,9 +135,10 @@ response = notifications_client.send_email_notification(
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 
@@ -172,7 +174,7 @@ Otherwise the client will raise a `HTTPError`:
 #### Arguments
 
 <details>
-<summary>Click here for more information</summary>
+<summary>Click here to expand for more information</summary>
 
 ##### `email_address`
 The email address of the recipient, only required for email notifications.
@@ -233,9 +235,10 @@ response = notifications_client.send_letter_notification(
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 ```python
@@ -324,9 +327,10 @@ response = notifications_client.get_notification_by_id(notification_id)
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 
@@ -371,10 +375,11 @@ Otherwise the client will raise a `HTTPError`:
 
 #### Method
 
+This will return one page of notifications (250) per call. Use the `get_all_notifications_iterator` to retrieve all notifications unpaginated. 
 <details>
 
 <summary>
-This will return one page of notifications (250) per call. Use the `get_all_notifications_iterator` to retrieve all notifications unpaginated. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 
@@ -386,9 +391,10 @@ response = notifications_client.get_all_notifications(template_type, status, ref
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 
@@ -442,7 +448,6 @@ Otherwise the client will raise a `HTTPError`:
 
 
 #### Arguments
-
 
 <details>
 <summary>Click here to expand for more information.</summary>
@@ -604,7 +609,9 @@ This is the `reference` you gave at the time of sending the notification. The `r
 ## Get a template by ID
 
 #### Method 
+
 This will return the latest version of the template. Use [get_template_version](#get-a-template-by-id-and-version) to retrieve a specific template version. 
+
 <details>
 <summary>
 Click here to expand for more information.
@@ -620,9 +627,10 @@ response = notifications_client.get_template(
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 
@@ -678,9 +686,10 @@ response = notifications_client.get_template_version(
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 ```python
@@ -723,9 +732,10 @@ The version number of the template.
 
 #### Method
 
+This will return the latest version for each template. 
 <details>
 <summary>
-This will return the latest version for each template. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 
@@ -741,9 +751,10 @@ response = notifications_client.get_all_templates(
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 ```python
@@ -812,9 +823,10 @@ response = notifications_client.post_template_preview(
 
 #### Response
 
+If the request is successful, `response` will be a `dict`. 
 <details>
 <summary>
-If the request is successful, `response` will be a `dict`. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 

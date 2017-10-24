@@ -7,6 +7,12 @@ This documentation is for developers interested in using this Java client to int
 ### Maven
 
 The notifications-java-client is deployed to [Bintray](https://bintray.com/gov-uk-notify/maven/notifications-java-client). Add this snippet to your Maven `settings.xml` file.
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>
 <settings xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd' xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
@@ -49,8 +55,15 @@ Then add the Maven dependency to your project.
     </dependency>
 
 ```
+</details>
 
 ### Gradle
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
 ```
 repositories {
     mavenCentral()
@@ -63,6 +76,7 @@ dependencies {
     compile('uk.gov.service.notify:notifications-java-client:3.4.0-RELEASE')
 }
 ```
+</details>
 
 ### Artifactory or Nexus
 

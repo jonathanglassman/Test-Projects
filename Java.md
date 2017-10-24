@@ -337,49 +337,46 @@ An optional unique identifier for the notification or an identifier for a batch 
 Click here to expand for more information.
 </summary>
 
-```python
-response = notifications_client.get_notification_by_id(notification_id)
+```java
+Notification notification = client.getNotificationById(notificationId);
 ```
 </details>
 
 #### Response
 
-If the request is successful, `response` will be a `dict`. 
+If successful a `notification` is returned. Below is a list of attributes in a `notification`. 
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
 
-```python
-{
-  "id": "notify_id", # required
-  "reference": "client reference", # optional
-  "email_address": "email address",  # required for emails
-  "phone_number": "phone number",  # required for sms
-  "line_1": "full name of a person or company", # required for letter
-  "line_2": "123 The Street", # required for letter
-  "line_3": "Some Area", # optional
-  "line_4": "Some Town", # optional
-  "line_5": "Some county", # optional
-  "line_6": "Something else", # optional
-  "postcode": "postcode", # required for letter
-  "type": "sms|letter|email", # required
-  "status": "current status", # required
-  "template": {
-    "version": 1 # template version num # required
-    "id": 1 # template id # required
-    "uri": "/v2/template/{id}/{version}", # required
-  },
-  "body": "Body of the notification",
-  "subject": "Subject of an email notification or None if an sms message"
-	"created_at": "created at", # required
-	"sent_at": " sent to provider at", # optional
-	"completed_at:" "date the notification is delivered or failed" # optional
-}
+```java
+    UUID id;
+    Optional<String> reference;
+    Optional<String> emailAddress;
+    Optional<String> phoneNumber;
+    Optional<String> line1;
+    Optional<String> line2;
+    Optional<String> line3;
+    Optional<String> line4;
+    Optional<String> line5;
+    Optional<String> line6;
+    Optional<String> postcode;
+    String notificationType;
+    String status;
+    UUID templateId;
+    int templateVersion;
+    String templateUri;
+    String body;
+    Optional<String subject;
+    DateTime createdAt;
+    Optional<DateTime> sentAt;
+		Optional<DateTime> completedAt;
+    Optional<DateTime> estimatedDelivery;
 ```
 
-Otherwise the client will raise a `HTTPError`:
+Otherwise the client will raise a `NotificationClientException`.
 
 |`error.status_code`|`error.message`|
 |:---|:---|
@@ -388,11 +385,10 @@ Otherwise the client will raise a `HTTPError`:
 
 </details>
 
-## Get the status of all messages (with pagination)
+## Get the status of all messages
 
 #### Method
 
-This will return one page of notifications (250) per call. Use the `get_all_notifications_iterator` to retrieve all notifications unpaginated. 
 <details>
 
 <summary>
@@ -400,15 +396,15 @@ Click here to expand for more information.
 </summary>
 
 
-```python
-response = notifications_client.get_all_notifications(template_type, status, reference, older_than)
+```java
+NotificationList notification = client.getNotifications(status, notificationType, reference, olderThanId);
 ```
 
 </details>
 
 #### Response
 
-If the request is successful, `response` will be a `dict`. 
+If successful a `NotificationList` is returned. Below is a list of attributes in a`NotificationList`. 
 <details>
 <summary>
 Click here to expand for more information.
@@ -416,48 +412,17 @@ Click here to expand for more information.
 
 
 
-```python
-{"notifications":
-  [
-    {
-      "id": "notify_id", # required
-      "reference": "client reference", # optional
-      "email_address": "email address",  # required for emails
-      "phone_number": "phone number",  # required for sms
-      "line_1": "full name of a person or company", # required for letter
-      "line_2": "123 The Street", # required for letter
-      "line_3": "Some Area", # optional
-      "line_4": "Some Town", # optional
-      "line_5": "Some county", # optional
-      "line_6": "Something else", # optional
-      "postcode": "postcode", # required for letter
-      "type": "sms | letter | email", # required
-      "status": sending | delivered | permanent-failure | temporary-failure | technical-failure # required
-      "template": {
-        "version": 1 # template version num # required
-        "id": 1 # template id # required
-        "uri": "/v2/template/{id}/{version}", # required
-      },
-      "body": "Body of the notification",
-      "subject": "Subject of an email notification or None if an sms message"
-      "created_at": "created at", # required
-      "sent_at": " sent to provider at", # optional
-      "completed_at:" "date the notification is delivered or failed" # optional
-    },
-    …
-  ],
-  "links": {
-    "current": "/notifications?template_type=sms&status=delivered",
-    "next": "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
-  }
-}
+```java
+    List<Notification> notifications;
+    String currentPageLink;
+    Optional<String> nextPageLink;
 ```
 
-Otherwise the client will raise a `HTTPError`:
+Otherwise the client will raise a `NotificationClientException`.
 
 |`error.status_code`|`error.message`|
 |:---|:---|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
+|`404`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
 |`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Apple is not one of [sms, email, letter]"`<br>`}]`|
 
 
@@ -466,107 +431,6 @@ Otherwise the client will raise a `HTTPError`:
 
 #### Arguments
 
-
-<details>
-<summary>Click here to expand for more information.</summary>
-
-##### `template_type`
-
-You can filter by:
-
-* `email`
-* `sms`
-* `letter`
-
-You can omit this argument to ignore this filter.
-
-##### `status`
-
-__email__
-
-You can filter by:
-
-* `sending` - the message is queued to be sent by the provider.
-* `delivered` - the message was successfully delivered.
-* `failed` - this will return all failure statuses `permanent-failure`, `temporary-failure` and `technical-failure`.
-* `permanent-failure` - the provider was unable to deliver message, email does not exist; remove this recipient from your list.
-* `temporary-failure` - the provider was unable to deliver message, email box was full; you can try to send the message again.
-* `technical-failure` - Notify had a technical failure; you can try to send the message again.
-
-You can omit this argument to ignore this filter.
-
-__text message__
-
-You can filter by:
-
-* `sending` - the message is queued to be sent by the provider.
-* `delivered` - the message was successfully delivered.
-* `failed` - this will return all failure statuses `permanent-failure`, `temporary-failure` and `technical-failure`.
-* `permanent-failure` - the provider was unable to deliver message, phone number does not exist; remove this recipient from your list.
-* `temporary-failure` - the provider was unable to deliver message, the phone was turned off; you can try to send the message again.
-* `technical-failure` - Notify had a technical failure; you can try to send the message again.
-
-You can omit this argument to ignore this filter.
-
-__letter__
-
-You can filter by:
-
-* `accepted` - the letter has been generated.
-* `technical-failure` - Notify had an unexpected error while sending to our printing provider
-
-You can omit this argument to ignore this filter.
-
-##### `reference`
-
-This is the `reference` you gave at the time of sending the notification. The `reference` can be a unique identifier for the notification or an identifier for a batch of notifications.
-
-You can omit this argument to ignore the filter.
-
-##### `olderThanId`
-
-You can get the notifications older than a given Notification.notificationId.
-
-You can omit this argument to ignore the filter.
-
-</details>
-
-## Get the status of all messages (without pagination)
-
-#### Method
-
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
-
-```python
-response = get_all_notifications_iterator(status="sending")
-```
-</details>
-
-#### Response
-
-If the request is successful, `response` will be a `<generator object>` that will yield all messages. 
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
-
-```python
-<generator object NotificationsAPIClient.get_all_notifications_iterator at 0x1026c7410>
-```
-
-Otherwise the client will raise a `HTTPError`:
-
-|`error.status_code`|`error.message`|
-|:---|:---|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
-|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "Apple is not one of [sms, email, letter]"`<br>`}]`|
-
-</details>
-
-#### Arguments
 
 <details>
 <summary>Click here to expand for more information.</summary>

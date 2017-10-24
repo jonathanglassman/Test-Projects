@@ -524,9 +524,10 @@ response = get_all_notifications_iterator(status="sending")
 
 #### Response
 
+If the request is successful, `response` will be a `<generator object>` that will yield all messages. 
 <details>
 <summary>
-If the request is successful, `response` will be a `<generator object>` that will yield all messages. Click here to expand for more information.
+Click here to expand for more information.
 </summary>
 
 ```python

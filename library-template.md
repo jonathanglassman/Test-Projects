@@ -149,6 +149,16 @@ Click here to expand for more information.
 XYZ
 </details>
 
+#### Arguments
+
+XYZ
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+XYZ
+</details>
 
 ## Get the status of all messages (with pagination)
 

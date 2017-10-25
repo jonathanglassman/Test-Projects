@@ -274,18 +274,6 @@ XYZ
 </details>
 
 
-#### Arguments
-
-XYZ
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
-
-XYZ
-</details>
-
-
 ## Get all templates
 
 #### Method

@@ -356,36 +356,76 @@ Otherwise the parameter can be omitted or `undefined` can be passed in its place
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```javascript
+notifyClient
+	.getNotificationById(notificationId)
+	.then((response) => { })
+	.catch((err) => {})
+;
+```
+
 </details>
 
 
 #### Response
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+If the request is successful, `response` will be an `object`:
+
+```javascript
+{
+    "id": "notify_id",
+    "body": "Hello Foo",
+    "subject": "null|email_subject",
+    "reference": "client reference",
+    "email_address": "email address",
+    "phone_number": "phone number",
+    "line_1": "full name of a person or company",
+    "line_2": "123 The Street",
+    "line_3": "Some Area",
+    "line_4": "Some Town",
+    "line_5": "Some county",
+    "line_6": "Something else",
+    "postcode": "postcode",
+    "type": "sms|letter|email",
+    "status": "current status",
+    "template": {
+        "version": 1,
+        "id": 1,
+        "uri": "/template/{id}/{version}"
+     },
+    "created_at": "created at",
+    "sent_at": "sent to provider at",
+}
+```
+
+Otherwise the client will return an error `err`:
+
+|`err.error.status_code`|`err.error.errors`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "id is not a valid UUID"`<br>`}]`|
+
 </details>
 
 #### Arguments
 
-XYZ
+???
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+???
 </details>
 
 ## Get the status of all messages (with pagination)

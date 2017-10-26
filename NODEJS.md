@@ -428,79 +428,108 @@ Click here to expand for more information.
 ???
 </details>
 
-## Get the status of all messages (with pagination)
+## Get the status of all messages
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```javascript
+notifyClient
+	.getNotifications(templateType, status, reference, olderThan)
+	.then((response) => { })
+	.catch((err) => {})
+;
+```
 </details>
 
 
 #### Response
 
-XYZ
+If the request is successful, `response` will be an `object`.
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
-</details>
+```javascript
+{ "notifications":
+    [{
+        "id": "notify_id",
+        "reference": "client reference",
+        "email_address": "email address",
+        "phone_number": "phone number",
+        "line_1": "full name of a person or company",
+        "line_2": "123 The Street",
+        "line_3": "Some Area",
+        "line_4": "Some Town",
+        "line_5": "Some county",
+        "line_6": "Something else",
+        "postcode": "postcode",
+        "type": "sms | letter | email",
+        "status": sending | delivered | permanent-failure | temporary-failure | technical-failure
+        "template": {
+            "version": 1,
+          "id": 1,
+          "uri": "/template/{id}/{version}"
+       },
+       "created_at": "created at",
+       "sent_at": "sent to provider at",
+    },
+    …
+  ],
+  "links": {
+     "current": "/notifications?template_type=sms&status=delivered",
+     "next": "/notifications?other_than=last_id_in_list&template_type=sms&status=delivered"
+  }
+}
+```
 
+|`err.error.status_code`|`err.error.errors`|
+|:---|:---|
+|`400`|`[{`<br>`"error": "ValidationError",`<br>`"message": "bad status is not one of [created, sending, delivered, pending, failed, technical-failure, temporary-failure, permanent-failure]"`<br>`}]`|
+|`400`|`[{`<br>`"error": "Apple is not one of [sms, email, letter]"`<br>`}]`|
+
+</details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
-</details>
+##### `templateType`
 
+If omitted all messages are returned. Otherwise you can filter by:
 
-## Get the status of all messages (without pagination)
+* `email`
+* `sms`
+* `letter`
 
-#### Method
+##### `status`
 
-XYZ
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
+If omitted all messages are returned. Otherwise you can filter by:
 
-XYZ
-</details>
+* `sending` - the message is queued to be sent by the provider.
+* `delivered` - the message was successfully delivered.
+* `failed` - this will return all failure statuses `permanent-failure`, `temporary-failure` and `technical-failure`.
+* `permanent-failure` - the provider was unable to deliver message, email or phone number does not exist; remove this recipient from your list.
+* `temporary-failure` - the provider was unable to deliver message, email box was full or the phone was turned off; you can try to send the message again.
+* `technical-failure` - Notify had a technical failure; you can try to send the message again.
 
-#### Response
+##### `reference`
 
-XYZ
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
+This is the `reference` you gave at the time of sending the notification. This can be omitted to ignore the filter.
 
-XYZ
-</details>
+##### `olderThan`
 
+If omitted all messages are returned. Otherwise you can filter to retrieve all notifications older than the given notification `id`.
 
-#### Arguments
-
-XYZ
-<details>
-<summary>
-Click here to expand for more information.
-</summary>
-
-XYZ
 </details>
 
 
@@ -508,37 +537,133 @@ XYZ
 
 #### Method 
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```javascript
+notifyClient
+    .getTemplateById(templateId)
+    .then((response) => { })
+    .catch((err) => {})
+;
+```
+
 </details>
 
 
 #### Response
 
-XYZ
+If the request is successful, `response` will be an `object`.
+
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```javascript
+{
+    "id": "template_id",
+    "type": "sms|email|letter",
+    "created_at": "created at",
+    "updated_at": "updated at",
+    "version": "version",
+    "created_by": "someone@example.com",
+    "body": "body",
+    "subject": "null|email_subject"
+}
+```
+
+Otherwise the client will return an error `err`:
+
+|`err.error.status_code`|`err.error.errors`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"No result found"`<br>`}]`|
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `templateId`
+
+Find by clicking **API info** for the template you want to send.
+
+</details>
+
+
+## Get a template by ID and version
+
+#### Method
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+```javascript
+notifyClient
+    .getTemplateByIdAndVersion(templateId, version)
+    .then((response) => { })
+    .catch((err) => {})
+;
+```
+
+</details>
+
+
+#### Response
+
+If the request is successful, `response` will be an `object`.
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+```javascript
+{
+    "id": "template_id",
+    "type": "sms|email|letter",
+    "created_at": "created at",
+    "updated_at": "updated at",
+    "version": "version",
+    "created_by": "someone@example.com",
+    "body": "body",
+    "subject": "null|email_subject"
+}
+```
+Otherwise the client will return an error `err`:
+
+|`err.error.status_code`|`err.error.errors`|
+|:---|:---|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"No result found"`<br>`}]`|
+
+</details>
+
+
+#### Arguments
+
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+##### `templateId`
+
+Find by clicking **API info** for the template you want to send.
+
+##### `version`
+
+The version number of the template
+</details>
+
 </details>
 
 
@@ -546,37 +671,77 @@ XYZ
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```javascript
+notifyClient
+    .getAllTemplates(templateType)
+    .then((response) => { })
+    .catch((err) => {})
+;
+```
+This will return the latest version for each template.
+
 </details>
 
 
 #### Response
 
-XYZ
+If the request is successful, `response` will be an `object`.
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```javascript
+{
+    "templates" : [
+        {
+            "id": "template_id",
+            "type": "sms|email|letter",
+            "created_at": "created at",
+            "updated_at": "updated at",
+            "version": "version",
+            "created_by": "someone@example.com",
+            "body": "body",
+            "subject": "null|email_subject"
+        },
+        {
+            ... another template
+        }
+    ]
+}
+```
+
+If no templates exist for a template type or there no templates for a service, the `response` will be an `object` with an empty `templates` list element:
+
+```javascript
+{
+    "templates" : []
+}
+```
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `templateType`
+
+If omitted all messages are returned. Otherwise you can filter by:
+
+* `email`
+* `sms`
+* `letter`
+
 </details>
 
 
@@ -584,38 +749,95 @@ XYZ
 
 #### Method
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+```javascript
+personalisation = { "foo": "bar" };
+notifyClient
+    .previewTemplateById(templateId, personalisation)
+    .then((response) => { })
+    .catch((err) => {})
+;
+```
+
 </details>
 
 
 #### Response
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+If the request is successful, `response` will be an `object`:
+
+```javascript
+{
+    "id": "notify_id",
+    "type": "sms|email|letter",
+    "version": "version",
+    "body": "Hello bar" // with substitution values,
+    "subject": "null|email_subject"
+}
+```
+
+Otherwise the client will return an error `err`:
+
+|`err.error.status_code`|`err.error.errors`|
+|:---|:---|
+|`400`|`[{`<br>`"error": "BadRequestError",`<br>`"Missing personalisation: [name]"`<br>`}]`|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"No result found"`<br>`}]`|
+
 </details>
 
 
 #### Arguments
 
-XYZ
 <details>
 <summary>
 Click here to expand for more information.
 </summary>
 
-XYZ
+##### `templateId`
+
+Find by clicking **API info** for the template you want to send.
+
+##### `personalisation`
+
+If a template has placeholders you need to provide their values. For example:
+
+```javascript
+personalisation={
+    'first_name': 'Amala',
+    'reference_number': '300241',
+}
+```
+
+Otherwise the parameter can be omitted or `undefined` can be passed in its place.
+
 </details>
+
+
+## Tests
+
+There are unit and integration tests that can be run to test functionality of the client. You will need to have the relevant environment variables sourced to run the tests.
+
+To run the unit tests:
+
+```sh
+npm test
+```
+
+To run the integration tests:
+
+```sh
+npm test --integration
+```
+
 
 
 

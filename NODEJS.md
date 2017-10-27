@@ -579,7 +579,7 @@ Otherwise the client will return an error `err`:
 
 |`err.error.status_code`|`err.error.errors`|
 |:---|:---|
-|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"No result found"`<br>`}]`|
+|`404`|`[{`<br>`"error": "NoResultFound",`<br>`"message": "No result found"`<br>`}]`|
 
 </details>
 

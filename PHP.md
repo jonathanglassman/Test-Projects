@@ -514,6 +514,42 @@ Find by clicking **API info** for the template you want to send.
 
 </details>
 
+## Get a template by ID and version
+
+#### Method
+
+XYZ
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+XYZ
+</details>
+
+
+#### Response
+
+XYZ
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+XYZ
+</details>
+
+
+#### Arguments
+
+XYZ
+<details>
+<summary>
+Click here to expand for more information.
+</summary>
+
+XYZ
+</details>
 
 ## Get all templates
 

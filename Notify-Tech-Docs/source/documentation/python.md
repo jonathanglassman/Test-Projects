@@ -436,7 +436,7 @@ The ID of the notification.
 
 ## Get the status of all messages
 
-You can return the status of all message both with and without pagination.
+You can return the status of all messages both with and without pagination.
 
 ### Method
 

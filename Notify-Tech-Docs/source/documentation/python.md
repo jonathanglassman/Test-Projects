@@ -340,7 +340,7 @@ personalisation={
   'address_line_2': 'London', # Second line of address
   'postcode': 'SW14 6BF', # Postcode
   'name': 'John Smith', # Name
-  'application_id': '4134325', # application identifier
+  'application_id': '4134325', # Application identifier
 }
 ```
 

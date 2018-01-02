@@ -11,9 +11,9 @@ There are limits for the number of messages sent per day. These limits differ de
 |Service status|API Key Type|Service type|Daily limit|
 |:---|:---|:---|:---|
 |Live|Team / Live|Central Government|250,000|
-|||Local / NHS|25,000|
-||Test|All|Unlimited|
+|Live|Team / Live|Local / NHS|25,000|
+|Live|Test|All|Unlimited|
 |Trial|Team / Live|All|50|
-||Test|All|Unlimited|
+|Trial|Test|All|Unlimited|
 
 Limits reset at midnight.

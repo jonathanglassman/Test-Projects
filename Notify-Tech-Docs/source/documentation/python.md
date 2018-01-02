@@ -456,13 +456,17 @@ Run your application to send a request to API Notification client.
 
 This will return one page of up to 250 messages and statuses. You can get either the most recent messages, or get older messages by specifying a particular notification ID in the `older_than` argument.
 
-Add the following method code to your application to get the most recent messages:
+##### Most recent messages
+
+Add the following method code to your application:
 
 ```python
 response = get_all_notifications_iterator(status="sending")
 ```
 
 Run your application to send a request to API Notification client.
+
+##### Older messages
 
 To get older messages:
 
@@ -473,7 +477,7 @@ To get older messages:
     response = get_all_notifications_iterator(status="sending",older_than="NOTIFICATION ID")
     ```
 
-It will return the next oldest messages from the specified notification ID.
+Run your application to send a request to API Notification client. It will return the next oldest messages from the specified notification ID.
 
 ### Response
 

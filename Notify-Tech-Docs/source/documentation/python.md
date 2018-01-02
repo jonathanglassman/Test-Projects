@@ -336,11 +336,11 @@ The personalisation argument also contains all specified letter template placeho
 
 ```python
 personalisation={
-  'address_line_1': '123 High Street', # First line of address
-  'address_line_2': 'London', # Second line of address
-  'postcode': 'SW14 6BF', # Postcode
-  'name': 'John Smith', # Name
-  'application_id': '4134325', # Application identifier
+  'address_line_1': '123 High Street', # first line of address
+  'address_line_2': 'London', # second line of address
+  'postcode': 'SW14 6BF', # postcode
+  'name': 'John Smith', # name
+  'application_id': '4134325', # application identifier
 }
 ```
 
